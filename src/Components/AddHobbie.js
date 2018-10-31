@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import uuid from 'uuid';
 class AddHobbie extends Component {
 
     //store data we submit into state
@@ -22,6 +22,7 @@ class AddHobbie extends Component {
             alert('Please type in the textbox one of your hobbies!');
         } else {
             this.setState({newHobbie: {
+                id: uuid.v4,
                 hobbyName: this.refs.hobbyName.value,
                 activity: this.refs.activity.value
             }}, function(){

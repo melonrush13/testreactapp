@@ -3,6 +3,10 @@ import HobbieItem from './HobbieItem';
 
 class Hobbies extends Component {
 
+  deleteHobbie(id) {
+    this.props.onDelete(id);
+  }
+
   render() {
       let hobbieItems;
       //if there are any hobbies,
@@ -12,7 +16,7 @@ class Hobbies extends Component {
         hobbieItems = this.props.hobbies.map(hobby => {
 
           return (
-            <HobbieItem key = {hobby.hobbyName} hobby = {hobby} />
+            <HobbieItem onDelete={this.deleteHobbie.bind(this)} key = {hobby.hobbyName} hobby = {hobby} />
           );
           
       });
@@ -29,5 +33,6 @@ class Hobbies extends Component {
     );
   }
 }
+
 
 export default Hobbies;

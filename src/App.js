@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import uuid from 'uuid';
 import Hobbies from './Components/Hobbies';
 import Bio from './Components/Bio';
 import AddHobbie from './Components/AddHobbie';
@@ -22,22 +23,27 @@ class App extends Component {
   componentWillMount() {
     this.setState({hobbies: [ 
             {
+              id:uuid.v4(),
               hobbyName: 'running',
               activity: 'athletic'
             },
             {
+              id:uuid.v4(),
               hobbyName: 'playing soccer',
               activity: 'athletic'
             },
             {
+              id:uuid.v4(),
               hobbyName: 'roller blading',
               activity: 'athletic'
             },
             {
+              id:uuid.v4(),
               hobbyName: 'making websites!',
               activity: 'nerdy'
             },
             {
+              id:uuid.v4(),
               hobbyName: 'Playing VideoGames',
               activity: 'nerdy'
             },
@@ -55,6 +61,18 @@ class App extends Component {
     hobbies.push(hobby);
     this.setState({hobbies: hobbies});
   }
+
+  handleDeleteHobby(id) {
+    //get id from state
+    let hobbies = this.state.hobbies;
+
+    //get id we want, and reset the state. 
+    let index = hobbies.findIndex(x => x.id === id);
+    //where that index is, delete one from that
+    hobbies.splice(index, 1);
+    //reset the state
+    this.setState({hobbies:hobbies});
+  }
   
 
   //passing our state hobbies in as a [property]
@@ -65,7 +83,7 @@ class App extends Component {
         Mel's First React App! 
         <AddHobbie addHobbie={this.handleAddHobbie.bind(this)} />
 
-        <Hobbies hobbies = {this.state.hobbies} />
+        <Hobbies hobbies = {this.state.hobbies} onDelete = {this.handleDeleteHobby.bind(this)} />
 
         <Bio test=" Hello, World!"/>
       
