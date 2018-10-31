@@ -1,3 +1,10 @@
+
+
+Simple React app that demonstrates how components work, and adding and deleting user input. Shows a list of "hobbies", and let's you add or delete them. Practicing changing states and passing around objects.
+
+Based off the youtube video: https://www.youtube.com/watch?v=A71aqufiNtQ
+
+--------------------------------------------------------------------------------------------------
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
