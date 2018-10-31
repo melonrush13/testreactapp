@@ -1,9 +1,10 @@
 
 import React, { Component } from 'react';
 import uuid from 'uuid';
+import $ from 'jquery';
 import Hobbies from './Components/Hobbies';
-import Bio from './Components/Bio';
 import AddHobbie from './Components/AddHobbie';
+import Todos from './Components/Todos'
 import './App.css';
 
 class App extends Component {
@@ -14,41 +15,57 @@ class App extends Component {
     super();
     this.state = {
       //state called hobbies
-      hobbies: []
+      hobbies: [],
+      todos: []
       
     }
   }
 
+  getTodos() {
+    $.ajax({
+      url: 'https://jsonplaceholder.typicode.com/todos',
+      dataType: 'json',
+      catche: false,
+      success: function(data) {
+        this.setState({todos: data}, function() {
+          console.log(this.state);
+        })
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.log(err);
+      }
+    });
+  }
+
+  getHobbies() {
+    this.setState({hobbies: [ 
+      {
+        id:uuid.v4(),
+        hobbyName: 'running',
+        activity: 'athletic'
+      },
+      {
+        id:uuid.v4(),
+        hobbyName: 'playing soccer',
+        activity: 'athletic'
+      },
+      {
+        id:uuid.v4(),
+        hobbyName: 'Playing VideoGames',
+        activity: 'nerdy'
+      },
+    ]});
+  }
+
   //fires off everytime component is rerendered
   componentWillMount() {
-    this.setState({hobbies: [ 
-            {
-              id:uuid.v4(),
-              hobbyName: 'running',
-              activity: 'athletic'
-            },
-            {
-              id:uuid.v4(),
-              hobbyName: 'playing soccer',
-              activity: 'athletic'
-            },
-            {
-              id:uuid.v4(),
-              hobbyName: 'roller blading',
-              activity: 'athletic'
-            },
-            {
-              id:uuid.v4(),
-              hobbyName: 'making websites!',
-              activity: 'nerdy'
-            },
-            {
-              id:uuid.v4(),
-              hobbyName: 'Playing VideoGames',
-              activity: 'nerdy'
-            },
-          ]
-        });
+    this.getTodos();
+    this.getHobbies();
+  }
+
+  //lifecycle function
+  componentDidMount() {
+    this.getTodos();
   }
     
   handleAddHobbie(hobby) {
@@ -84,8 +101,8 @@ class App extends Component {
         <AddHobbie addHobbie={this.handleAddHobbie.bind(this)} />
 
         <Hobbies hobbies = {this.state.hobbies} onDelete = {this.handleDeleteHobby.bind(this)} />
-
-        <Bio test=" Hello, World!"/>
+        <hr />
+        <Todos todos={this.state.todos}/>
       
       </div>
     );

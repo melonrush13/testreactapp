@@ -1,8 +1,15 @@
 
 
-Simple React app that demonstrates how components work, and adding and deleting user input. Shows a list of "hobbies", and let's you add or delete them. Practicing changing states and passing around objects.
+Simple React app that demonstrates how components work, and adding and deleting user input. 
+Shows a list of "hobbies", and let's you add or delete them. 
+Practicing changing states and passing around objects.
+
+Imported a sample api, using Ajv, and Jquery, with this data: https://jsonplaceholder.typicode.com/todos
 
 Based off the youtube video: https://www.youtube.com/watch?v=A71aqufiNtQ
+
+
+
 
 --------------------------------------------------------------------------------------------------
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
